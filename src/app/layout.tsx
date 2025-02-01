@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Vazirmatn } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-components/theme-provider";
 
 const vazirFont = Vazirmatn({
     subsets: ["arabic"],
@@ -33,7 +34,11 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" dir="ltr">
-            <body className={`${geistSans.variable} ${geistMono.variable} ${vazirFont.variable} antialiased dark`}>{children}</body>
+            <body className={`${geistSans.variable} ${geistMono.variable} ${vazirFont.variable} antialiased`}>
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                    {children}
+                </ThemeProvider>
+            </body>
         </html>
     );
 }
