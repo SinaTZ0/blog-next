@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Vazirmatn } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-components/theme-provider";
+import { QueryProvider } from "@/lib/react-query/query-provider1";
 
 const vazirFont = Vazirmatn({
     subsets: ["arabic"],
@@ -36,7 +37,7 @@ export default function RootLayout({
         <html lang="en" dir="ltr" suppressHydrationWarning>
             <body className={`${geistSans.variable} ${geistMono.variable} ${vazirFont.variable} antialiased`}>
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                    {children}
+                    <QueryProvider>{children}</QueryProvider>
                 </ThemeProvider>
             </body>
         </html>
