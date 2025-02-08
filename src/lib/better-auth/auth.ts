@@ -4,6 +4,7 @@ import { db } from "@/lib/drizzle/db-connection"; // your drizzle instance
 import env from "@/env";
 import { createClient } from "redis";
 import { plugin_CookieAge_Log } from "./plugin-cookieAge-log";
+import { admin } from "better-auth/plugins";
 
 const redis = await createClient()
     .on("error", (err) => console.log("Redis Client Error", err))
@@ -13,7 +14,7 @@ export const auth = betterAuth({
     database: drizzleAdapter(db, {
         provider: "pg", // or "mysql", "sqlite"
     }),
-    plugins: [plugin_CookieAge_Log()],
+    plugins: [plugin_CookieAge_Log(), admin()],
     emailAndPassword: {
         enabled: true,
     },
@@ -29,11 +30,13 @@ export const auth = betterAuth({
             },
         },
     },
+
     user: {
         additionalFields: {
-            role: {
+            lang: {
                 type: "string",
                 required: false,
+                input: true,
             },
         },
     },
@@ -54,6 +57,6 @@ export const auth = betterAuth({
     },
     session: {
         expiresIn: 60 * 60 * 24 * 7, // 7 days
-        updateAge: 5, // 1 day (every 1 day the session expiration is updated)
+        updateAge: 60 * 60 * 24 * 1, // 1 day (every 1 day the session expiration is updated)
     },
 });

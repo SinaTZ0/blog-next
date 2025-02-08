@@ -9,20 +9,10 @@ export const user = pgTable("user", (t) => ({
     createdAt: t.timestamp().notNull(),
     updatedAt: t.timestamp().notNull(),
     lang: t.text(),
-}));
-
-export const session = pgTable("session", (t) => ({
-    id: t.text().primaryKey(),
-    expiresAt: t.timestamp().notNull(),
-    token: t.text().notNull().unique(),
-    createdAt: t.timestamp().notNull(),
-    updatedAt: t.timestamp().notNull(),
-    ipAddress: t.text(),
-    userAgent: t.text(),
-    userId: t
-        .text()
-        .notNull()
-        .references(() => user.id),
+    role: t.text("role").notNull(),
+    banned: t.boolean("banned").default(false),
+    banReason: t.text("ban_reason"),
+    banExpires: t.timestamp("ban_expires"),
 }));
 
 export const userLoginLogs = pgTable("user_login_logs", (t) => ({
