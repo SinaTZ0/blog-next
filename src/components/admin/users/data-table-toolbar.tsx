@@ -65,9 +65,9 @@ export function DataTableToolbar<TData>({
     };
 
     return (
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between py-4" dir="rtl">
             <Input
-                placeholder="Filter emails..."
+                placeholder="جستجو در ایمیل‌ها..."
                 value={
                     (table.getColumn("email")?.getFilterValue() as string) ?? ""
                 }
@@ -91,32 +91,32 @@ export function DataTableToolbar<TData>({
                             <DropdownMenuItem
                                 onClick={() => handleBulkAction("makeAdmin")}
                             >
-                                Make Admin
+                                تبدیل به ادمین
                             </DropdownMenuItem>
                             <DropdownMenuItem
                                 onClick={() => handleBulkAction("makeUser")}
                             >
-                                Make User
+                                تبدیل به کاربر
                             </DropdownMenuItem>
                             <DropdownMenuItem
                                 onClick={() => handleBulkAction("ban")}
                             >
-                                Ban Users
+                                مسدود کردن کاربران
                             </DropdownMenuItem>
                             <DropdownMenuItem
                                 onClick={() => handleBulkAction("unban")}
                             >
-                                Unban Users
+                                رفع مسدودیت کاربران
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 )}
-                <DropdownMenu>
+                <DropdownMenu dir="rtl">
                     <DropdownMenuTrigger asChild>
-                        <Button variant="outline">View</Button>
+                        <Button variant="outline">نمایش</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-[150px]">
-                        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+                        <DropdownMenuLabel>تنظیم ستون‌ها</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         {table
                             .getAllColumns()
@@ -130,7 +130,7 @@ export function DataTableToolbar<TData>({
                                         column.toggleVisibility(!!value)
                                     }
                                 >
-                                    {column.id}
+                                    {translateColumnName(column.id)}
                                 </DropdownMenuCheckboxItem>
                             ))}
                     </DropdownMenuContent>
@@ -138,4 +138,17 @@ export function DataTableToolbar<TData>({
             </div>
         </div>
     );
+}
+
+function translateColumnName(columnId: string): string {
+    const translations: Record<string, string> = {
+        select: "انتخاب",
+        name: "نام",
+        email: "ایمیل",
+        role: "نقش",
+        banned: "وضعیت",
+        createdAt: "تاریخ عضویت",
+        actions: "عملیات",
+    };
+    return translations[columnId] || columnId;
 }

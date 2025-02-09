@@ -46,11 +46,11 @@ export const columns: ColumnDef<SelectUser>[] = [
     {
         accessorKey: "name",
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Name" />
+            <DataTableColumnHeader column={column} title="نام" />
         ),
         cell: ({ row }) => {
             return (
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 ">
                     <Avatar className="h-8 w-8">
                         <AvatarImage
                             src={row.original.image ?? undefined}
@@ -68,19 +68,19 @@ export const columns: ColumnDef<SelectUser>[] = [
     {
         accessorKey: "email",
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Email" />
+            <DataTableColumnHeader column={column} title="ایمیل" />
         ),
     },
     {
         accessorKey: "role",
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Role" />
+            <DataTableColumnHeader column={column} title="نقش" />
         ),
         cell: ({ row }) => {
             const role = row.getValue("role") as string;
             return (
                 <Badge variant={role === "admin" ? "destructive" : "secondary"}>
-                    {role}
+                    {role === "admin" ? "ادمین" : "کاربر"}
                 </Badge>
             );
         },
@@ -88,13 +88,13 @@ export const columns: ColumnDef<SelectUser>[] = [
     {
         accessorKey: "banned",
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Status" />
+            <DataTableColumnHeader column={column} title="وضعیت" />
         ),
         cell: ({ row }) => {
             const banned = row.getValue("banned") as boolean;
             return (
                 <Badge variant={banned ? "destructive" : "secondary"}>
-                    {banned ? "Banned" : "Active"}
+                    {banned ? "مسدود" : "فعال"}
                 </Badge>
             );
         },
@@ -102,10 +102,12 @@ export const columns: ColumnDef<SelectUser>[] = [
     {
         accessorKey: "createdAt",
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Joined" />
+            <DataTableColumnHeader column={column} title="تاریخ عضویت" />
         ),
         cell: ({ row }) => {
-            return new Date(row.getValue("createdAt")).toDateString();
+            return new Date(row.getValue("createdAt")).toLocaleDateString(
+                "fa-IR"
+            );
         },
     },
     {

@@ -46,6 +46,7 @@ export function DataTable<TData, TValue>({
     const table = useReactTable({
         data,
         columns,
+        columnResizeDirection: "rtl",
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
@@ -63,16 +64,19 @@ export function DataTable<TData, TValue>({
     });
 
     return (
-        <div>
+        <div dir="rtl">
             <DataTableToolbar table={table} />
             <div className="rounded-md border">
                 <Table>
-                    <TableHeader>
+                    <TableHeader dir="rtl">
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
                                     return (
-                                        <TableHead key={header.id}>
+                                        <TableHead
+                                            key={header.id}
+                                            className=" [&:has([role=checkbox])]:text-center [&:has([role=checkbox])]:px-4"
+                                        >
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
@@ -86,7 +90,7 @@ export function DataTable<TData, TValue>({
                             </TableRow>
                         ))}
                     </TableHeader>
-                    <TableBody>
+                    <TableBody dir="rtl">
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
@@ -96,7 +100,10 @@ export function DataTable<TData, TValue>({
                                     }
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
+                                        <TableCell
+                                            key={cell.id}
+                                            className="[&:has([role=checkbox])]:text-center  [&:has([role=checkbox])]:px-4"
+                                        >
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext()
@@ -125,7 +132,7 @@ export function DataTable<TData, TValue>({
                     onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
                 >
-                    Previous
+                    قبلی
                 </Button>
                 <Button
                     variant="outline"
@@ -133,7 +140,7 @@ export function DataTable<TData, TValue>({
                     onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
                 >
-                    Next
+                    بعدی
                 </Button>
             </div>
         </div>

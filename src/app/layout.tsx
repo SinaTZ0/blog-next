@@ -35,8 +35,15 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" dir="ltr" suppressHydrationWarning>
-            <body className={`${geistSans.variable} ${geistMono.variable} ${vazirFont.variable} antialiased`}>
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} ${vazirFont.variable} antialiased`}
+            >
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
                     <QueryProvider>{children}</QueryProvider>
                 </ThemeProvider>
             </body>

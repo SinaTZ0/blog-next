@@ -89,19 +89,19 @@ export function DataTableRowActions<TData>({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[160px]">
                 <DropdownMenuItem onClick={() => handleSetRole("admin")}>
-                    Make Admin
+                    تبدیل به ادمین
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleSetRole("user")}>
-                    Make User
+                    تبدیل به کاربر
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 {user.banned ? (
                     <DropdownMenuItem onClick={handleUnbanUser}>
-                        Unban User
+                        رفع مسدودیت
                     </DropdownMenuItem>
                 ) : (
                     <DropdownMenuItem onClick={handleBanUser}>
-                        Ban User
+                        مسدود کردن
                     </DropdownMenuItem>
                 )}
             </DropdownMenuContent>
