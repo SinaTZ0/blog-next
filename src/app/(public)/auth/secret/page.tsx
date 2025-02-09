@@ -11,6 +11,7 @@ const page = async () => {
         return (
             <div className="flex flex-col">
                 <div>{session.user.name}</div>
+                <div>{session.user.role}</div>
                 <Link href={"/auth/signup"} className="text-blue-500">
                     signup
                 </Link>

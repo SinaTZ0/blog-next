@@ -23,7 +23,7 @@ export function AuthTabs() {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <Tabs defaultValue="signin" className="w-full h-[33rem]">
+                <Tabs defaultValue="signin" className="w-full ">
                     <TabsList className="grid w-full grid-cols-2">
                         <TabsTrigger value="signin">ورود</TabsTrigger>
                         <TabsTrigger value="signup">ثبت‌نام</TabsTrigger>

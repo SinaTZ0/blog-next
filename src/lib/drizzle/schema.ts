@@ -15,6 +15,8 @@ export const user = pgTable("user", (t) => ({
     banExpires: t.timestamp("ban_expires"),
 }));
 
+export type SelectUser = typeof user.$inferSelect;
+
 export const userLoginLogs = pgTable("user_login_logs", (t) => ({
     id: t.serial().primaryKey(),
     createdAt: t.timestamp().notNull().defaultNow(),
